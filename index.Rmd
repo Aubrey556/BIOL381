@@ -14,4 +14,4 @@ output:
 
 * second item
 
-* third item
+* third
