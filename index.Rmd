@@ -10,8 +10,5 @@ output:
 
 #Homeworks
 
-* [Homework 1](TestHW1.html)
-
-* second item
-
-* third
+* [Homework 1](Homework_1.html)
+* [Homework 2](Homework_2.html)

@@ -1,7 +1,6 @@
 ---
-title: "HW1"
+title: "Homework 2"
 author: "Aubrey Pelletier"
 date: "August 29, 2018"
 output: html_document
 ---
-
