@@ -1,0 +1,95 @@
+---
+title: "First R Markdown file"
+author: "Aubrey Pelletier"
+date: "September 4, 2018"
+output:
+  html_document: 
+    number_sections: yes
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Hello world!     What happens to funny spacing?             Is it preserved?
+
+First line.   
+Second line.  
+Third Line.  
+
+italic *this way*
+
+boldface **like this**
+
+subscript~lower~
+
+superscript^raised^
+
+strikethrough ~~for mistaks~~
+
+#First level
+
+##Second level
+
+...
+
+######Six level!
+
+
+lists are easy
+
+- first item
+- second item
+- third item, and yes it will keep everything aligned, just as it should be for longer text!
+     - subitem
+         - sub-subitem
+      
+      
+>All musicians are subconciously mathematicians
+
+The Thelonious Monk
+
+Use single backtick for in-line emphasis `like this`.
+
+Show literal text as `3 + pi`.
+
+Start with r to get it to run r code like this `r 3 + pi`.
+
+### Code fencing
+
+```
+#Comments are important!
+pred <- seq(1,10) # make a vector of integers from 1 to 10
+response <- runif(10)
+print(response)
+
+# now plot a graph
+plot(x=pred, y=response, type="b")
+
+```
+
+```{r, eval=FALSE, echo=TRUE}
+#Comments are important!
+pred <- seq(1,10) # make a vector of integers from 1 to 10
+response <- runif(10)
+print(response)
+
+# now plot a graph
+plot(x=pred, y=response, type="b")
+
+```
+
+##Creating equations with `LaTex`
+
+An `inline` equation is bracketed by single dollar signs $3 + 5 = 8$ like this.
+
+For more complex equations, we will render them on a single line by using a double dollar sign to bracket them:
+
+$$3 + 5 = 8$$
+
+Keeps this as a stand-alone piece.
+
+Subscripts as follows:
+
+$$H_0 = Z_{a + b_{3z}}$$
