@@ -183,14 +183,124 @@ print(response)
 plot(x=pred, y=response, type=&quot;b&quot;)</code></pre>
 </div>
 </div>
+<div id="links" class="section level2">
+<h2><span class="header-section-number">1.2</span> Links</h2>
+<p><a href="http://example.com" class="uri">http://example.com</a></p>
+<p><a href="http://example.com">linked phrase</a></p>
+<p>A <a href="http://example.com/" title="Title">linked phrase</a></p>
+</div>
+<div id="images" class="section level2">
+<h2><span class="header-section-number">1.3</span> Images</h2>
+<div class="figure">
+<img src="data:text/html; charset=UTF-8,%3C%21doctype%20html%3E%0A%3Chtml%3E%0A%3Chead%3E%0A%20%20%20%20%3Ctitle%3EExample%20Domain%3C%2Ftitle%3E%0A%0A%20%20%20%20%3Cmeta%20charset%3D%22utf%2D8%22%20%2F%3E%0A%20%20%20%20%3Cmeta%20http%2Dequiv%3D%22Content%2Dtype%22%20content%3D%22text%2Fhtml%3B%20charset%3Dutf%2D8%22%20%2F%3E%0A%20%20%20%20%3Cmeta%20name%3D%22viewport%22%20content%3D%22width%3Ddevice%2Dwidth%2C%20initial%2Dscale%3D1%22%20%2F%3E%0A%20%20%20%20%3Cstyle%20type%3D%22text%2Fcss%22%3E%0A%20%20%20%20body%20%7B%0A%20%20%20%20%20%20%20%20background%2Dcolor%3A%20%23f0f0f2%3B%0A%20%20%20%20%20%20%20%20margin%3A%200%3B%0A%20%20%20%20%20%20%20%20padding%3A%200%3B%0A%20%20%20%20%20%20%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%7D%0A%20%20%20%20div%20%7B%0A%20%20%20%20%20%20%20%20width%3A%20600px%3B%0A%20%20%20%20%20%20%20%20margin%3A%205em%20auto%3B%0A%20%20%20%20%20%20%20%20padding%3A%2050px%3B%0A%20%20%20%20%20%20%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20%20%20%20%20%20%20border%2Dradius%3A%201em%3B%0A%20%20%20%20%7D%0A%20%20%20%20a%3Alink%2C%20a%3Avisited%20%7B%0A%20%20%20%20%20%20%20%20color%3A%20%2338488f%3B%0A%20%20%20%20%20%20%20%20text%2Ddecoration%3A%20none%3B%0A%20%20%20%20%7D%0A%20%20%20%20%40media%20%28max%2Dwidth%3A%20700px%29%20%7B%0A%20%20%20%20%20%20%20%20body%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20div%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20auto%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20margin%3A%200%20auto%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20border%2Dradius%3A%200%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20padding%3A%201em%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20%3C%2Fstyle%3E%20%20%20%20%0A%3C%2Fhead%3E%0A%0A%3Cbody%3E%0A%3Cdiv%3E%0A%20%20%20%20%3Ch1%3EExample%20Domain%3C%2Fh1%3E%0A%20%20%20%20%3Cp%3EThis%20domain%20is%20established%20to%20be%20used%20for%20illustrative%20examples%20in%20documents%2E%20You%20may%20use%20this%0A%20%20%20%20domain%20in%20examples%20without%20prior%20coordination%20or%20asking%20for%20permission%2E%3C%2Fp%3E%0A%20%20%20%20%3Cp%3E%3Ca%20href%3D%22http%3A%2F%2Fwww%2Eiana%2Eorg%2Fdomains%2Fexample%22%3EMore%20information%2E%2E%2E%3C%2Fa%3E%3C%2Fp%3E%0A%3C%2Fdiv%3E%0A%3C%2Fbody%3E%0A%3C%2Fhtml%3E%0A" title="Title" alt="alt text" />
+<p class="caption">alt text</p>
+</div>
+</div>
+<div id="tables" class="section level2">
+<h2><span class="header-section-number">1.4</span> Tables</h2>
+<table>
+<thead>
+<tr class="header">
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr class="even">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>library(knitr)
+kable(head(iris))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+</tbody>
+</table>
+<div id="head-command-says-to-use-first-6-lines-of-information-i.e.first-6-lines-of-data-from-iris-dataset" class="section level6">
+<h6><span class="header-section-number">1.4.0.0.0.1</span> Head command says to use first 6 lines of information (i.e. first 6 lines of data from iris dataset)</h6>
+</div>
+</div>
 <div id="creating-equations-with-latex" class="section level2">
-<h2><span class="header-section-number">1.2</span> Creating equations with <code>LaTex</code></h2>
+<h2><span class="header-section-number">1.5</span> Creating equations with <code>LaTex</code></h2>
 <p>An <code>inline</code> equation is bracketed by single dollar signs <span class="math inline">\(3 + 5 = 8\)</span> like this.</p>
 <p>For more complex equations, we will render them on a single line by using a double dollar sign to bracket them:</p>
 <p><span class="math display">\[3 + 5 = 8\]</span></p>
 <p>Keeps this as a stand-alone piece.</p>
 <p>Subscripts as follows:</p>
 <p><span class="math display">\[H_0 = Z_{a + b_{3z}}\]</span></p>
+</div>
+<div id="fractions-and-greek-symbols" class="section level2">
+<h2><span class="header-section-number">1.6</span> Fractions and Greek symbols</h2>
+<p><span class="math display">\[\alpha = \frac{\beta}{\delta + \gamma_{x=3}}\]</span></p>
+</div>
+<div id="summation-sign" class="section level2">
+<h2><span class="header-section-number">1.7</span> Summation Sign</h2>
+<p><span class="math display">\[z=\sum_{i=1}^{J-1}{K_i}\]</span></p>
+</div>
+<div id="escaping-backslash-character" class="section level2">
+<h2><span class="header-section-number">1.8</span> Escaping backslash character</h2>
+<p><span class="math display">\[ \backslash \alpha \le b \backslash\]</span></p>
+</div>
+<div id="mixing-plain-text-in-latex" class="section level2">
+<h2><span class="header-section-number">1.9</span> Mixing plain text in LaTex</h2>
+<p><span class="math display">\[P(\mbox{Occurrence Of Species A}) = Z\]</span></p>
 </div>
 </div>
 

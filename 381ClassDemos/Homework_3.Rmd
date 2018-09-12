@@ -1,0 +1,75 @@
+---
+title: "Field Research in Australia!"
+author: "Aubrey Pelletier"
+date: "September 12, 2018"
+output: 
+  beamer_presentation: 
+    colortheme: beetle
+    fonttheme: structurebold
+    theme: Rochester
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Experimental Design
+
+ \begin{picture}(320,250)
+ \put(100,250){\includegraphics[height=4cm, angle=-90]{Experimental_Design.jpg}}
+ \put(00,80){\begin{minipage}[t]{1\linewidth}
+ {This is how we set up our transects for our traps to catch bandicoots and possums to do mark/recapture population estimates in the Harry Waring Marsupial Reserve owned by the University of Western Australia.}
+ \end{minipage}}
+ \end{picture}
+
+
+## What to do when you reach a trap with an animal:
+
+> - \color{blue} Approach slowly and carefully
+> - \color{green} Make sure your light is not shining directly at the trap
+> - \color{blue} Use your bag to remove the animal, then handle through the bag gently and firmly, keeping their head in the dark as much as possible.
+
+## What to do when you reach a trap with an animal:
+
+ \begin{picture}(320,250)
+ \put(110,230){\includegraphics[height=3cm, angle=-90]{Steps_for_Handling.jpg}}
+ \put(30,100){\begin{minipage}[t]{1\linewidth}
+{\begin{itemize} 
+\item Approach slowly and carefully
+\item Make sure your light is not shining directly at the trap
+\item  Use your bag to remove the animal, then handle through the bag gently and firmly, keeping their head in the dark as much as possible
+\end{itemize}}
+ \end{minipage}}
+ \end{picture} 
+ 
+ 
+ ##Field Measurements
+ 
+ \begin{picture}(320,250)
+ \put(100,230){\includegraphics[height=4cm, angle=-90]{Bandicoot_Snout_Length.jpg}}
+ \put(00,60){\begin{minipage}[t]{1\linewidth}
+ {Here, we are measuring snout length on a bandicoot.}
+ \end{minipage}}
+ \end{picture}
+ 
+ 
+##Pouch Young
+
+\begin{picture}(320,250)
+ \put(100,235){\includegraphics[height=3.5cm, angle=-90]{Bandicoot_Pouch_Young.jpg}}
+ \put(00,80){\begin{minipage}[t]{1\linewidth}
+ {Bandicoots don't have a set breeding season, so they breed all year long. This is one that got stressed out and ejected her pouch young, so we had to place them back in and tape her pouch shut with tape that will keep it shut for a few hours until she calmed down.}
+ \end{minipage}}
+ \end{picture}
+
+##Possums
+\begin{picture}(320,250)
+ \put(50,300){\includegraphics[height=8cm, angle=-90]{Possum_on_Tree.jpg}}
+ \put(00,70){\begin{minipage}[t]{1\linewidth}
+ {\color{white} I got to handle a possum, which was much more \color{red} fiesty
+ \color{white}
+ than the bandicoots. They hissed and squirmed and were generally very unhappy with our mark/recapture efforts.}
+ \end{minipage}}
+ \end{picture}
+ 
+
