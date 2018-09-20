@@ -138,3 +138,73 @@ z <- vector(mode="numeric", length = 0)
 print(z)
 z <- c(z,5)
 print (z)
+
+# better to pre-allocate vector space
+z <- rep(0,100) #repeat number zero 100 times
+str(z)
+head(z)
+tail(z)
+#start with NAs
+z <- rep(NA,100)
+head(z)
+typeof(z)
+
+z[2] <-"Adams" #assign to second slot of vector the value Adams
+head(z)
+typeof(z)
+
+# efficiently add names to an atomic vector
+
+myVector <- runif(100)
+head(myVector)
+myNames <- paste("Species", seq(1:length(myVector)), sep="") #pastes together different elements into a character string. Starts at sequence 1, starts at 1 to length of myVector
+head(myNames)
+tail(myNames)
+names(myVector)
+names(myVector) <- myNames
+head(myVector)
+
+# use rep() funciton to repeat elements and vector
+
+rep(0.5, 6)
+rep(x=0.5, times = 6)
+rep(times=6, x=.5)
+rep(6, 0.5)
+myVec <- c(2, 4, 1)
+rep(x=myVec, times=2) #repeat myVec 2 times
+rep(x=myVec, each=2) #repeats each number twice before moving on to the next
+rep(x=myVec, times=myVec) #each element is repeated that number of times
+rep(x=myVec, each=myVec)
+
+# use seq()to create regular sequences
+seq(from=2, to=4)
+2:4
+seq(from=2, to=4, by=0.5)
+seq(from=2, to=4, length=7)
+1:length(myVec)
+seq_along(myVec)
+seq_len(5)
+
+# quickly creating random numbers
+
+runif(5) # 5 [0,1] uniform values
+runif(n=3, min=100, max=110) #3 random values between 100 and 110
+
+rnorm(6) # mean0, SD1      
+rnorm(n=3, mean=100, sd=10)
+
+# sample from an atomic vector
+
+longVec <- LETTERS[1:10]
+print(longVec)
+sample(longVec) #randomly reshuffles positions
+vecTreat <- c(rep("Control", 5), rep ("Treatment", 5))
+vecTreat
+sample(vecTreat)
+sample(x=longVec, size=3) #always samples without repeating, can't sample more than 10
+sample(x=longVec, size 16)
+sample(x=longVec, size=16, replace=TRUE) #allows us to repeat items
+myWeights <- c(rep(20,5), rep(100,5))
+myWeights
+sample(x=longVec, replace=TRUE,prob=myWeights) #myWeights must be same length as my vector and have non-zero values, we gave more weight to the last 5 letters than the first 5, so they're more likely to be drawn
+sample(x=longVec, replace=FALSE,prob=myWeights) #makes sure that each letter is only drawn once, so most elements from last in the list are drawn first b/c of the myWeights vector, but not allowing to replace means they all have to be drawn

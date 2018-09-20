@@ -1,0 +1,111 @@
+---
+title: "Homework_4"
+author: "Aubrey Pelletier"
+date: "September 19, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#1
+```{r}
+x <- 1.1
+a <- 2.2
+b <- 3.3
+
+z <- x^(a^b)
+print(z)
+
+z <- (x^a)^b
+print(z)
+
+z <- (3*x^3 + 2*x^2 +1)
+print(z)
+```
+#2
+```{r}
+vec1 <- (seq(1:8))
+vec2 <- (seq(from=7, to=1))
+veca <- c(vec1, vec2)
+print(veca)
+
+vecx <- (seq(1:5))
+vecb <- (rep(vecx, vecx))
+print(vecb)
+
+vec1 <- (seq(from=5,to=1))
+vecc <- (rep(vec1, vecx))
+print(vecc)
+```
+#3
+```{r}
+v3 <- runif(2)
+names(v3) <- c("x", "y")
+print(v3)
+
+r <- sqrt(v3[1]^2 +v3[2]^2)
+print(r)
+theta <- atan(v3[2] / v3[1])
+
+polar <-c(r, theta)
+names(polar) <- c("r", "theta")
+print(polar)
+```
+#4
+```{r}
+queue <- c("sheep", "fox", "owl", "ant")
+print(queue)
+queue1 <- c(queue, "serpent")
+print(queue1)
+queue2 <- queue1[2:5]
+print(queue2)
+queue3 <- c("donkey", queue2)
+print(queue3)
+queue4 <- (queue3[1:4])
+print(queue4)
+queue5 <- c(queue4[1:2], queue4[4])
+print(queue5)
+queue6 <- c(queue5[1:2], "aphid", queue5[3])
+print(queue6)
+#Where is the aphid in line?
+Aphid <- which("aphid" == queue6)
+print(Aphid)
+
+#5, Create a vector of all integers from 1:100, not divisible by 2 ,3, or 7.
+int <- (seq(1:100))
+newint <- int[int%/%2!=0 & int%/%3!=0 & int%/%7!=0]
+```
+#6
+
+```
+Original Text: 
+First String    Second      1.22      3.4
+Second          More Text   1.555555  2.2220
+Third           x           3         124
+
+Command:
+Find: \s{3,}
+Replace: ,
+
+Transformed text:
+First String,Second,1.22,3.4
+Second,More Text,1.555555,2.2220
+Third,x,3,124
+
+#7
+Original
+Ballif, Bryan, University of Vermont
+Ellison, Aaron, Harvard Forest
+Record, Sydne, Bryn Mawr
+
+Find:
+(\w+),\s(\w+),\s(.*)
+
+Replace:
+\2 \1 \(\3\)
+
+Transformed Text:
+Bryan Ballif (University of Vermont)
+Aaron Ellison (Harvard Forest)
+Sydne Record (Bryn Mawr)
