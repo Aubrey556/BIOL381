@@ -92,8 +92,10 @@ Transformed text:
 First String,Second,1.22,3.4
 Second,More Text,1.555555,2.2220
 Third,x,3,124
+```
 
 #7
+```
 Original
 Ballif, Bryan, University of Vermont
 Ellison, Aaron, Harvard Forest
@@ -109,3 +111,55 @@ Transformed Text:
 Bryan Ballif (University of Vermont)
 Aaron Ellison (Harvard Forest)
 Sydne Record (Bryn Mawr)
+```
+#8
+```
+Original:
+0001 Georgia Horseshoe.mp3 0002 Billy In The Lowground.mp3 0003 Cherokee Shuffle.mp3 0004 Walking Cane.mp3
+
+Find: mp3 
+
+Replace:mp3\n
+
+Transformed Text:
+0001 Georgia Horseshoe.mp3
+0002 Billy In The Lowground.mp3
+0003 Cherokee Shuffle.mp3
+0004 Walking Cane.mp3
+
+Find: (\w{4}) (\w+) (\w.*).mp3
+Replace: \2 \3_\1.mp3
+
+Georgia Horseshoe_0001.mp3
+Billy In The Lowground_0002.mp3
+Cherokee Shuffle_0003.mp3
+Walking Cane_0004.mp3
+```
+#9
+```
+Original Text:
+Camponotus,pennsylvanicus,10.2,44
+Camponotus,herculeanus,10.5,3
+Myrmica,punctiventris,12.2,4
+Lasius,neoniger,3.3,55
+
+Find:(\w{1}).*,(\w+),(\w+).(\w),(\w+)
+Replace:\1_\2,\5
+
+Transformed Text:
+C_pennsylvanicus,44
+C_herculeanus,3
+M_punctiventris,4
+L_neoniger,55
+
+Start with original again.
+Find:(\w{1}).*,(\w{4}).*,(\w+).(\w),(\w+)
+Replace: \1_\2,\5
+
+Transformed Text:
+C_penn,44
+C_herc,3
+M_punc,4
+L_neon,55
+```
+

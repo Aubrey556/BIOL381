@@ -1,0 +1,55 @@
+---
+title: 'Homework #5'
+author: "Aubrey Pelletier"
+date: "September 26, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=F, warning=FALSE}
+library(dplyr)
+data(iris)
+
+glimpse(iris)
+#There are 150 observations of 5 variables
+
+anyNA(iris)
+
+iris1 <- filter(iris, Species == c("virginica", "versicolor"), Sepal.Length >6, Sepal.Width >2.5)
+glimpse(iris1)
+
+#There are 28 observations of 5 variables 
+iris2 <- select(iris1, Species, Sepal.Length, Sepal.Width)
+glimpse(iris2)
+#There are 28 observations of 3 variables  
+
+iris3 <- arrange(iris2, desc(Sepal.Length))
+head(iris3)  
+
+iris4 <- mutate(iris3, Sepal.Area = Sepal.Length*Sepal.Width)
+glimpse(iris4)
+#28 observations of 4 variables
+
+iris5 <- summarize(iris4, meanLength = mean(Sepal.Length), meanHeight = mean(Sepal.Width), number = n())
+print(iris5)
+
+GroupSpecies <- group_by(iris4, Species)
+iris6 <- summarize(GroupSpecies, meanLength = mean(Sepal.Length), meanHeight = mean(Sepal.Width), number = n())
+print(iris6)
+
+
+iris %>% 
+  filter( Species == c("virginica", "versicolor"), Sepal.Length >6, Sepal.Width >2.5) %>%
+  select(Species, Sepal.Length, Sepal.Width) %>%
+  arrange(desc(Sepal.Length)) %>%
+  mutate(Sepal.Area = Sepal.Length*Sepal.Width) %>%
+  group_by(Species) %>%
+  summarize(meanLength = mean(Sepal.Length), meanHeight = mean(Sepal.Width), number = n()) %>%
+  print(iris)
+
+
+  
+```
