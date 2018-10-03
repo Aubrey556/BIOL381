@@ -15,3 +15,4 @@ output:
 * [Homework 3](Homework_3.pdf)
 * [Homework 4](Homework_4.html)
 * [Homework 5](Homework_5.html)
+* [Homework 6](Homework_6.html)

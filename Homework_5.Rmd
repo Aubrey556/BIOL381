@@ -42,7 +42,7 @@ print(iris6)
 
 
 iris %>% 
-  filter( Species == c("virginica", "versicolor"), Sepal.Length >6, Sepal.Width >2.5) %>%
+  filter( Species %in% c("virginica", "versicolor"), Sepal.Length >6, Sepal.Width >2.5) %>%
   select(Species, Sepal.Length, Sepal.Width) %>%
   arrange(desc(Sepal.Length)) %>%
   mutate(Sepal.Area = Sepal.Length*Sepal.Width) %>%

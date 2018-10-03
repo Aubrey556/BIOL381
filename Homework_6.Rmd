@@ -1,0 +1,158 @@
+---
+title: "Homework6"
+author: "Aubrey Pelletier"
+date: "October 3, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Long and Wide Data Formats
+library(tidyverse)
+data(iris)
+print(iris)
+
+longiris <- iris %>%
+  gather(Sepal.Length:Petal.Width, key="Trait", value = 
+           "Measurement") %>%
+  arrange(Species)
+
+print(longiris)
+
+
+SpeciesTrait <- group_by(longiris, Species, Trait)
+Averages <-summarize(SpeciesTrait, meanSepal.Length = mean(Measurement, na.rm = TRUE), number = n()) 
+print(Averages)
+
+
+
+
+#Simulating and Fitting Data Distributions
+
+library(ggplot2) # for graphics
+library(MASS) # for maximum likelihood estimation
+```
+
+z <- rnorm(n=3000,mean=0.2)
+z <- data.frame(1:3000,z)
+names(z) <- list("ID","myVar")
+z <- z[z$myVar>0,]
+str(z)
+summary(z$myVar)
+
+```{r}
+#Read in random online data about lizard sprint speed: http://www.zoology.ubc.ca/~whitlock/ABD/teaching/datasets/15/datasets15.html
+z <- read.table("15q24LizardSprintSpeed.csv",header=TRUE,sep=",", stringsAsFactors=FALSE)
+str(z)
+summary(z)
+
+names(z) <- list("ID","myVar")
+z <- z[z$myVar>0,]
+str(z)
+summary(z$myVar)
+
+p1 <- ggplot(data=z, aes(x=myVar, y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) 
+print(p1)
+
+p1 <-  p1 +  geom_density(linetype="dotted",size=0.75)
+print(p1)
+
+#Maximum Liklihood parameters for Normal Distribution
+normPars <- fitdistr(z$myVar,"normal")
+print(normPars)
+str(normPars)
+normPars$estimate["mean"] # note structure of getting a named attribute
+
+#Normal Probability Density
+meanML <- normPars$estimate["mean"]
+sdML <- normPars$estimate["sd"]
+
+xval <- seq(0,max(z$myVar),len=length(z$myVar))
+
+ stat <- stat_function(aes(x = xval, y = ..y..), fun = dnorm, colour="red", n = length(z$myVar), args = list(mean = meanML, sd = sdML))
+ p1 + stat
+
+#Exponential Probability Density
+expoPars <- fitdistr(z$myVar,"exponential")
+rateML <- expoPars$estimate["rate"]
+
+stat2 <- stat_function(aes(x = xval, y = ..y..), fun = dexp, colour="blue", n = length(z$myVar), args = list(rate=rateML))
+ p1 + stat + stat2
+
+#Uniform Probability Density
+ stat3 <- stat_function(aes(x = xval, y = ..y..), fun = dunif, colour="darkgreen", n = length(z$myVar), args = list(min=min(z$myVar), max=max(z$myVar)))
+ p1 + stat + stat2 + stat3
+
+#Gamma Probability Density
+ gammaPars <- fitdistr(z$myVar,"gamma")
+shapeML <- gammaPars$estimate["shape"]
+rateML <- gammaPars$estimate["rate"]
+
+stat4 <- stat_function(aes(x = xval, y = ..y..), fun = dgamma, colour="brown", n = length(z$myVar), args = list(shape=shapeML, rate=rateML))
+ p1 + stat + stat2 + stat3 + stat4
+
+#Beta Probability Density
+ pSpecial <- ggplot(data=z, aes(x=myVar/(max(myVar + 0.1)), y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) + 
+  xlim(c(0,1)) +
+  geom_density(size=0.75,linetype="dotted")
+
+betaPars <- fitdistr(x=z$myVar/max(z$myVar + 0.1),start=list(shape1=1,shape2=2),"beta")
+shape1ML <- betaPars$estimate["shape1"]
+shape2ML <- betaPars$estimate["shape2"]
+
+statSpecial <- stat_function(aes(x = xval, y = ..y..), fun = dbeta, colour="orchid", n = length(z$myVar), args = list(shape1=shape1ML,shape2=shape2ML))
+pSpecial + statSpecial
+
+#Read in random online data about lizard sprint speed: http://www.zoology.ubc.ca/~whitlock/ABD/teaching/datasets/15/datasets15.html
+z <- read.table("15q24LizardSprintSpeed.csv",header=TRUE,sep=",", stringsAsFactors=FALSE)
+str(z)
+summary(z)
+
+names(z) <- list("ID","myVar")
+z <- z[z$myVar>0,]
+str(z)
+summary(z$myVar)
+
+#Best Curve (Gamma) Maximum Liklihood parameters
+print(gammaPars)
+print(shapeML)
+print(rateML)
+
+
+
+gammaPars <- fitdistr(z$myVar,"normal")
+print(normPars)
+str(normPars)
+normPars$estimate["mean"] 
+
+
+#Simulate new data based on Maximum Liklihood parameters
+set.seed(7)
+LizardSprint <- (rgamma(68, shape = 24.37133, rate = 11.39317))
+LizardS <- data.frame(1:68,LizardSprint)
+names(LizardS) <- list("ID","myVar")
+
+p2 <- ggplot(data=LizardS, aes(x=myVar, y=..density..)) +
+  geom_histogram(color="grey60",fill="cornsilk",size=0.2) 
+print(p2)
+
+p2 <-  p2 +  geom_density(linetype="dotted",size=0.75)
+p2
+
+#Lizard Sprint Speed Original Data Plot
+ p1
+```
+
+#Compare to simulated Data
+ 
+###How do the two histogram profiles compare? Do you think the model is doing a good job of simulating realistic data that match your original measurements? Why or why not?
+ 
+#####The two histograms are pretty similar - the plotted curves look pretty similar, but the simulated one is a bit less "normal" looking. Overall, I'd say the model did a pretty good job of simulating realistic data that matched the original measurements, but the left-hand tail in the original data is a bit larger than the simulated data. This looks like it is just due to chance in the simulated data however, because when I don't set the seed and run it multiple times, it generates curves with larger left-hand tails. The graphs also have similar densities, as represented by the y-values shown and the curves.
+ 

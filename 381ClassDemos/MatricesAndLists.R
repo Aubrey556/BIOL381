@@ -197,6 +197,39 @@ m
 
 m[complete.cases(m),] #do this to each row, keeps columns intact
 #stripped out the first and last row
-m[complete.cases(m[,c(1,2)]),] #will only get rid of NAs for columns 1 and 2
+m[complete.cases(m[,c(1,2)]),] #will only get rid of NAs for columns 1 and 2, so only drops row #1
+m[complete.cases(m[,c(2,3)]),] #doesn't change anything, b/c there are no NAs in those columns
 
+# converting between long and wide data formats
+# Introducing the "tribble" a transposed tibble
+# use to build little tibbles inside a script
+library(tidyverse)
+repMeasDat <- tribble(
+  ~Subject, ~Treatment, ~Time1, ~Time2, ~Time3,
+  #--------------------------------------------
+  1,"Control", 1,1,2,
+  2,"Control", 1,4,2,
+  3,"Control", 2,2,2,
+  4,"Treatment", 5,6,6,
+  5,"Treatment", 7,7,5,
+  6,"Treatment", 7,5,5
+  #--------------------------------------------
+)
+print(repMeasDat)
+#get into long format with the "gather command"
 
+longDat <-repMeasDat %>%
+  gather(Time1:Time3, key="Time", value = 
+           "Response") %>%
+  arrange(Subject)
+print(longDat)
+
+longDat %>%
+  group_by(Time, Treatment) %>%
+  summarize(AvgRes=mean(Response)) %>%
+  arrange (Treatment, Time)
+print(longDat)
+
+wideDat <- longDat %>%
+  spread(key=Time, value=Response)
+print(wideDat)
