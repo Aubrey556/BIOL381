@@ -1,0 +1,146 @@
+---
+title: "Homework 7"
+author: "Aubrey Pelletier"
+date: "October 10, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+#Creating Fake Data Sets to Explore Hypotheses
+
+####I am using lizard sprint speed data from the internet that was used for one of previous homeworks I did. It has observations from each lizard, and their sprint speeds. I grabbed the mean and standard deviations from the excel document for the control group, and they had about 40 lizards, so I used that as my sample size to start. The data is attached below if curious. 
+####Then, I created a hypothetical treatment to use, if I fed them, I hypothesized that they would run more slowly because they would be fat and slow, so I made my treatment data set have a lower mean, but the same standard deviation.
+
+```{r}
+read.table(file="15q24LizardSprintSpeed.csv")
+```
+
+```{r}
+library(tidyverse)
+ 
+nObs <- 40 #number of observations
+
+LizSpeedControl <- rnorm(n=nObs, mean=2.14, sd=.44)
+LizSpeedTreat <- rnorm(n=nObs, mean=1.98, sd=.44)
+
+name <- ("Control")
+name1 <- ("Treat") 
+TreatCont <- rep(name, nObs)
+TreatTreat <- rep(name1, nObs)
+TreatVec <- c(TreatCont, TreatTreat)
+print(TreatVec)
+
+TreatVec <- c(rep(name, nObs), rep(name1, nObs)) #alternate code to get TreatVec
+print(TreatVec)
+
+Speeds <- c(LizSpeedControl, LizSpeedTreat)
+
+
+ID <-seq_len(nObs)
+
+LizData <- data.frame(ID,TreatVec,Speeds)
+print(data)
+str(data)
+
+#Using ANOVA model because we have a categorical and continuous variable
+ANOmodel <- aov(Speeds~TreatVec, data=LizData) #Speeds are a function of TreatVec(treatment)
+print(ANOmodel)
+print(summary(ANOmodel))
+
+# Basic ggplot of ANOVA data
+
+ANOPlot <- ggplot(data=LizData,
+                  aes(x=TreatVec, y=Speeds,
+                      fill = TreatVec)) +
+  geom_boxplot()
+print(ANOPlot)
+
+
+```
+
+###Step 5: Running the analysis switches frequently between significant and not significant, the p-value is very variable.
+##Step 6, change the means to look for effect size (how small can the difference between 
+
+```{r}
+nObs <- 40 #number of observations
+
+LizSpeedControl <- rnorm(n=nObs, mean=2.14, sd=.44)
+LizSpeedTreat <- rnorm(n=nObs, mean=1.9, sd=.44)
+
+name <- ("Control")
+name1 <- ("Treat") 
+TreatCont <- rep(name, nObs)
+TreatTreat <- rep(name1, nObs)
+TreatVec <- c(TreatCont, TreatTreat)
+print(TreatVec)
+
+TreatVec <- c(rep(name, nObs), rep(name1, nObs)) #alternate code to get TreatVec
+print(TreatVec)
+
+Speeds <- c(LizSpeedControl, LizSpeedTreat)
+
+
+ID <-seq_len(nObs)
+
+LizData <- data.frame(ID,TreatVec,Speeds)
+print(data)
+str(data)
+
+#Using ANOVA model because we have a categorical and continuous variable
+ANOmodel <- aov(Speeds~TreatVec, data=LizData) #Speeds are a function of TreatVec(treatment)
+print(ANOmodel)
+print(summary(ANOmodel))
+
+# Basic ggplot of ANOVA data
+
+ANOPlot <- ggplot(data=LizData,
+                  aes(x=TreatVec, y=Speeds,
+                      fill = TreatVec)) +
+  geom_boxplot()
+print(ANOPlot)
+```
+
+###6: Around 1.9 as the treatment value mean is when it starts becoming very variable between significant and non-significant results
+
+#7: What is the minimum sample size you would need in order to detect a statistically significant effect?
+####I lowered the mean of the treatment speeds to 1.8, because that was almost always significant, so that I could look separately at the sample size (nObs) to see where that came into play
+```{r}
+nObs <- 5 #number of observations
+
+LizSpeedControl <- rnorm(n=nObs, mean=2.14, sd=.44)
+LizSpeedTreat <- rnorm(n=nObs, mean=1.8, sd=.44)
+
+name <- ("Control")
+name1 <- ("Treat") 
+TreatCont <- rep(name, nObs)
+TreatTreat <- rep(name1, nObs)
+TreatVec <- c(TreatCont, TreatTreat)
+print(TreatVec)
+
+TreatVec <- c(rep(name, nObs), rep(name1, nObs)) #alternate code to get TreatVec
+print(TreatVec)
+
+Speeds <- c(LizSpeedControl, LizSpeedTreat)
+
+
+ID <-seq_len(nObs)
+
+LizData <- data.frame(ID,TreatVec,Speeds)
+print(data)
+str(data)
+
+#Using ANOVA model because we have a categorical and continuous variable
+ANOmodel <- aov(Speeds~TreatVec, data=LizData) #Speeds are a function of TreatVec(treatment)
+print(ANOmodel)
+print(summary(ANOmodel))
+
+# Basic ggplot of ANOVA data
+
+ANOPlot <- ggplot(data=LizData,
+                  aes(x=TreatVec, y=Speeds,
+                      fill = TreatVec)) +
+  geom_boxplot()
+print(ANOPlot)
+```
+
+####At nObs=25 there starts to be some variation - the results are still significant a majority of the time, but not always. At n=10, it seems to be about 50-50, and at n=5, they don't seem to be significant most of the time
