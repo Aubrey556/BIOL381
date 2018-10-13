@@ -105,3 +105,29 @@ lRegPlot <- ggplot(data = lRegData,
                    geom_point() +
                    stat_smooth(method=glm, method.args=list(family=binomial))
 print(lRegPlot)
+
+# Contingency table analysis
+
+# integer counts of different data groups
+
+vec1 <- c(50, 66, 22)
+vec2 <- c(120, 22, 30)
+dataMatrix <- rbind(vec1, vec2)
+rownames(dataMatrix) <- c("Cold", "Warm")
+colnames(dataMatrix) <- c("S1", "S2", "S3")
+str(dataMatrix)
+dataMatrix
+
+# basic contingency analysis
+print(chisq.test(dataMatrix))
+
+#simple plots in base R
+mosaicplot(x=dataMatrix,
+           col=c("goldenrod",
+                 "grey",
+                 "black"),
+           shade=FALSE)
+barplot(height=dataMatrix,
+        beside=TRUE,#set the columns next to one another
+        col=c("cornflowerblue",
+              "tomato")) #colors are useful, show cold and warm treatments

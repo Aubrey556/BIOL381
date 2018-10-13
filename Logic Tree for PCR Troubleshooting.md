@@ -1,5 +1,7 @@
 ```mermaid
-graph TD
+graph TD 
+
+
 A[Did RNA extractions work?] --> |Yes| AAA[Good quality with <br> no contamination?]
 AAA --> |Yes| B[Synthesize cDNA from RNA]
 AAA --> |No| AAAA[Column clean RNA]
@@ -53,3 +55,4 @@ style Q fill:#60ba65,stroke:#333,stroke-width:3px;
 style R fill:#60ba65,stroke:#333,stroke-width:3px;
 ```
 
+##### 
