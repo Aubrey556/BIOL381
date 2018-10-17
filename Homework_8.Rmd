@@ -1,0 +1,140 @@
+---
+title: "Homework 8"
+author: "Aubrey Pelletier"
+date: "October 17, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+###using the code from last class, we are redoing it in structured programming format
+``` {r}
+library(tidyverse)
+read.table(file="15q24LizardSprintSpeed.csv") #If you want to see the data this code was based on
+
+#Global Variables
+nObs <- 40 #number of observations
+
+
+#######################
+# FUNCTION: simulateData
+# INPUTS: mean and sd, nObs, all numeric values
+# OUTPUTS:Data Frame with 3 columns: ID, Treatment Type, and Measured Value
+
+#Creates a normal distribution and random values for the number of observations (nObs) for a control and treatment. Then, rearranges these values into a dataframe which has 3 columns: ID, which treatment group it was part of, and the recorded speed.
+#----------------------
+simulateData <- function(n1=nObs, mean1=2.14, sd1=.44, mean2=1.98, sd2=.44 ) {
+LizSpeedControl <- rnorm(n=n1, mean=mean1, sd=sd1)
+LizSpeedTreat <- rnorm(n=n1, mean=mean2, sd=sd2)
+
+name <- ("Control")
+name1 <- ("Treat") 
+
+
+TreatVec <- c(rep(name, n1), rep(name1, n1))
+print(TreatVec)
+
+Speeds <- c(LizSpeedControl, LizSpeedTreat)
+
+
+ID <-seq_len(n1)
+
+LizData <- data.frame(ID,TreatVec,Speeds)
+
+return(LizData)
+}
+
+simulateData()
+#----------------------
+#######################
+# FUNCTION: ANOVAAnalysis
+# INPUTS: x and y vectors
+# OUTPUTS: Boxplot of dataset
+
+#Runs an ANOVA, then returns a p-value in the summary and a boxplot of the ANOVA data
+#----------------------
+ANOVAAnalysis <- function(y=data$Speeds, x=data$TreatVec, data=simulateData())
+{
+ANOmodel <- aov(y~x, data=data)
+
+ANOPlot <- ggplot(data=data,
+                  aes(x=x, y=y,
+                      fill = x)) +
+  geom_boxplot()
+
+return(print(ANOPlot))
+}
+
+#######################
+# FUNCTION: ANOVASummary
+# INPUTS: x and y vectors
+# OUTPUTS: Summary including p-value
+
+#Runs an ANOVA, then returns a p-value in the summary
+#----------------------
+
+ANOVASummary <- function(y=data$Speeds, x=data$TreatVec, data=simulateData())
+{
+ANOmodel <- aov(y~x, data=data)
+
+ANOPlot <- ggplot(data=data,
+                  aes(x=x, y=y,
+                      fill = x)) +
+  geom_boxplot()
+
+return(summary(ANOmodel))
+}
+ANOVASummary()
+```
+
+
+
+
+Change the means to look for effect size
+
+```{r}
+
+simulateData2 <- simulateData(n1=nObs, mean2=1.9)
+ANOVAAnalysis2 <- ANOVAAnalysis(data=simulateData2)
+ANOVASummary2 <- ANOVASummary(data=simulateData2)
+
+ANOVAAnalysis2
+ANOVASummary2
+
+
+#Changed sample size, n=5
+
+simulateData3 <- simulateData (n1=5, mean1=2.14, sd1=.44, mean2=1.98, sd2=.44)
+ANOVAAnalysis3 <- ANOVAAnalysis(data=simulateData3)
+ANOVASummary3 <- ANOVASummary(data=simulateData3)
+
+ANOVAAnalysis3
+ANOVASummary3
+```
+
+```{r}
+
+#Making a new function by copying and pasting the old one and changing the code
+
+#######################
+# FUNCTION: HistData
+# INPUTS: Speed Vector
+# OUTPUTS: Histogram of dataset
+
+#Shows a Histogram of the Data for all lizard speeds
+#----------------------
+HistData <- function(data=simulateData(), x=(data$Speeds))
+{
+
+HistPlot <- ggplot(data=data,
+                  aes(x=x,
+                      fill = x)) +
+  geom_histogram()
+
+return(print(HistPlot))
+}
+
+
+HistData()
+
+```
+

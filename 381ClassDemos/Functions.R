@@ -124,3 +124,20 @@ varB <- rnorm(100)
 
 fitlinear(x=varA, y=varB)
 
+#######################
+# FUNCTION: fitlinear
+# INPUTS: numeric vector of predictor (x) and response (y)
+# OUTPUTS: slope and p value
+#----------------------
+fitlinear2 <- function(p=NULL) {
+  if(is.null(p)){
+    p <- list(x=runif(20), y=runif(20))
+  }
+  myMod <- lm(p$y~p$x) # fit of linear model
+  myOut <- c(slope=summary(myMod)$coefficients[2,1],
+             pValue=summary(myMod)$coefficients[2,4])
+  plot(x=p$x, y=p$y)
+  return(myOut)
+}
+#---------------------------------
+fitlinear2()
