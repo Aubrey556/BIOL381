@@ -1,0 +1,70 @@
+---
+title: "Homework 9"
+author: "Aubrey Pelletier"
+date: "October 24, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#######################
+# FUNCTION: Create a for loop to calculate # of zeros in a vector
+# INPUTS: vector
+# OUTPUTS: length
+#----------------------
+
+Vec <- 0
+z<-sample(0:10, 100, replace=TRUE)
+countZeros <- function(z= z) {
+  
+ for(i in seq_along(z)) {
+  if(z[i]!=0) next
+   count <- (Vec + 1)
+   
+}  
+  
+  return(count)
+  
+}
+countZeros()
+
+for(i in seq_along(z)) {
+  if(z[i]==0) count <- Vec + 1
+   
+} 
+
+count
+for(i in seq_along(z)) {
+  if(z[i]!=0) next
+    countZeros <- z[i]
+    cat("i=", i, "z[i]=", z[i], "\n")
+}
+
+summary(countZeros)
+
+
+
+#2
+z=sample(0:10, 100, replace=TRUE)
+zsub <- z[z==0]
+length(zsub)
+z
+
+
+#3
+runif
+maxDiff <- function(y=runif(5)) {
+  
+ for(i in seq_along(y)) {
+   n=1
+ Diffs <- 
+   
+}  
+  
+  return()
+  
+}
+ifelse(
+
+```

@@ -9,12 +9,20 @@
 # INPUTS: .csv data file
 # OUTPUTS: data frame
 #----------------------
-getData <- function(){
-  
-  
-  
-  return("getData is working!")
+getData <- function(fileName=NULL) {
+  if(is.null(fileName)) {
+    dataFrame <- data.frame(ID=101:110,
+                            varA=runif(10),
+                            varB=runif(10))
+  }  else {
+    dataFrame <- read.table(file=fileName,
+                            header=TRUE,
+                            sep=",",
+                            stringsAsFactors=FALSE) 
+  }
+  return(dataFrame)
 }
+getData()
 #----------------------
 #######################
 # FUNCTION: FitRegressionModel
@@ -34,22 +42,28 @@ fitRegressionModel()
 # INPUTS:
 # OUTPUTS:
 #----------------------
-summarizeOutput <- function(){
-  
-  
-  
-  return("summarizeOutput is working")
+summarizeOutput <- function(z=NULL) {
+  if(is.null(z)) {
+    z <- summary(lm(runif(10)~runif(10)))
+  }  
+  return(z$residuals)
 }
+summarizeOutput()
 #----------------------
 #######################
 # FUNCTION: graphResults
 # INPUTS:
 # OUTPUTS:
 #----------------------
-graphResults <- function(){
+graphResults <- function(xVar=runif(10), yVar=runif(10)) {
   
+  library(ggplot2)
+  dataFrame <- data.frame(xVar,yVar)
+
+  p1 <- qplot(data=dataFrame,x=xVar,y=yVar,geom=c("smooth","point"))
+  print(p1)
   
-  
-  return("graphResults is working")
 }
+graphResults()
+str(graphResults())
 #----------------------

@@ -1,0 +1,176 @@
+---
+title: "Homework 10"
+author: "Aubrey Pelletier"
+date: "October 31, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+
+#1
+##################################################
+#function: countZeros
+#count zeros in a numeric vector
+#input: numeric vector z 
+#output: number of zeros
+
+z <- sample(0:10, 100, replace=TRUE) #global variable in function
+
+countZeros <- function(vec=z){
+  counter <- 0
+  for(i in seq_along(vec)){
+    if(vec[i]==0) counter <- (counter+1)}
+
+
+return(counter)
+}
+##################################################
+
+countZeros()
+z
+
+#2
+z <- sample(0:10, 100, replace=TRUE)
+zsub <- z[z==0]
+length(zsub)
+#z - use to check how many zeros are in z
+
+
+
+#3
+###################################################
+#Function: createMatrix
+#create a matrix which has values of row*column in every slot
+#inputs: number of rows (n) and columns (m)
+#outputs: filled matrix with row*column in each slot
+
+createMatrix <- function(n=4, m=5){
+  
+  mat <- matrix(nrow=n, ncol=m)
+  for(i in 1:nrow(mat)){
+    for(j in 1:ncol(mat)){
+      mat[i,j] <- i*j
+    }
+  }
+  return(mat)
+}
+
+createMatrix()
+
+
+#4 Create a randomization test for lizard sprint speed data
+library(ggplot2)
+library(TeachingDemos)
+char2seed("Halloween")
+
+# function: readData
+#read in data from a csv file
+#inputs: csv file
+#outputs: data frame
+readData <- function(dF=1){
+  dF <- read.table(file="15q24LizardSprintSpeed.csv", header=TRUE, sep=",")
+  return(dF)
+}
+readData()
+#######################################
+
+#######################################
+#Function:getMetric
+#Calculate the metric (slope)
+#Inputs: data frame
+#Outputs: slope metric
+dF1 <- readData()
+getMetric <- function(dF=dF1){
+  names(dF) <- c("x","y")
+  . <- lm(dF$y~dF$x)
+  . <- summary(.)
+  . <- .$coefficients[2,1] #finding us metric(slope)
+  slope <- .
+  return(slope) #want to be around zero
+}
+
+####################################################
+getMetric()
+
+
+##################################################
+#Function: shuffleData
+#create randomization
+#inputs: data frame
+#outputs: shuffled data
+dF1 <- readData()
+shuffleData <- function(dF=dF1){
+  names(dF) <- c("x","y")
+  
+dF$y <- sample(dF$y)
+return(dF)
+}
+#################################################
+shuffleData()
+
+
+#################################################
+#function: getPVAL
+#calculate p-value from simulated metrics
+#input:
+#output: probability of getting our value or more extreme 
+
+
+getPVAL <- function(z=NULL){
+  if(is.null(z)){
+    z <- list(xObs=runif(1), xSim=runif(1000))}
+  pLower <- mean(z[[2]] <= z[[1]])
+  pUpper <- mean(z[[2]] >= z[[1]])
+  return(c(pLower,pUpper))
+}  
+getPVAL()
+
+##################################################
+# function: plotRanTest
+# create ggplot of histogram of simulated values
+# input: list of observed metric and vector of simulated metrics
+# output: saved ggplot graph
+#------------------------------------------------- 
+plotRanTest <- function(z=NULL) {
+  if(is.null(z)){
+    z <- list(rnorm(1),rnorm(1000)) }
+  dF <- data.frame(ID=seq_along(z[[2]]),simX=z[[2]])
+  p1 <- ggplot(data=dF,mapping=aes(x=simX))
+  p1 + geom_histogram(mapping=aes(fill=I("goldenrod"),color=I("black"))) +
+    geom_vline(aes(xintercept=z[[1]],col="blue")) 
+  
+}
+
+# now use functions to do the work
+plotRanTest()
+
+
+###Now use functions to do the work
+nSim <- 1000
+Xsim <- rep(NA, nSim)
+dF <- readData()        
+Xobs <- getMetric(dF) #finding the slope of our data
+
+for(i in seq_len(nSim)){
+  Xsim[i] <- getMetric(shuffleData(dF)) 
+}
+#simulating 1000 different reshufflings of our data and where our data falls (blue line)
+
+slopes <- list(Xobs, Xsim)
+
+getPVAL(slopes)
+
+plotRanTest(slopes)
+
+
+summary(lm(dF$speed~dF$lizard)) #find the p-value from our observed data using the summary to compare to the blue line in our histogram.
+
+#There is a difference between my data and the randomized data (supported by both the histogram with the randomized data from 1000 simulations and my observed data, and the summary line of code above. The histogram shows that my observed slope is never overlapping the slope of the randomized data - this means taht there is a difference in my data versus the randomized data, showing that my data DOES have a correlation between lizard and speed.
+
+
+
+```
+
+
