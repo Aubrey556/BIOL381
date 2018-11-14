@@ -14,9 +14,10 @@ library(ggthemes)
 
 df <- midwest #remember, data frame, so use $ to call columns
 
-head(midwest)
-str(midwest)
+head(df)
+str(df)
 
+qplot(x=df$state, color=I("black"), fill=I("darkgreen"))
 
 #Experiment with different themes, theme base sizes, aesthetics, mappings, and faceting. When you are finished, try exporting them to high quality pdfs, jpgs, eps files, or other formats that you would use for submission to a journal.
 
