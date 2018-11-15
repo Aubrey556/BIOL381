@@ -71,7 +71,7 @@ plotRanTest <- function(z=NULL) {
     geom_vline(aes(xintercept=z[[1]],col="blue")) 
   
 }
-
+ 
 # now use functions to do the work
 plotRanTest()
 
