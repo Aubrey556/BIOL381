@@ -73,7 +73,7 @@ plotRanTest <- function(z=NULL) {
 }
  
 # now use functions to do the work
-plotRanTest()
+plotRanTest() 
 
 
 ###Now use functions to do the work
