@@ -1,0 +1,115 @@
+---
+title: "Plotly presentation"
+author: "Aubrey Pelletier"
+date: "November 19, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r}
+# What is plot.ly? A package to create interactive graphics. It uses the htmlwidget framework, and is compatible with lots of different programs. Very useful for online graphs etc. b/c your data points are easily identified.
+
+# install.packages("plotly")
+
+library(plotly)
+
+
+plot_ly(z = ~volcano) #just to see if it's installed properly
+
+d <- mpg
+
+#Two main ways to get a plotly object.
+
+#plot_ly() transforms data into the object.
+  #data frames not required, but highly recommended
+  #basic structure: plot_ly( x , y ,type,mode,color ,size ) (type=type of graph(histogram etc., mode=format of data: points, lines, etc.)
+  #layout(plot ,title , xaxis = list(title ,titlefont ), yaxis = list(title ,titlefont ))
+
+
+p0 <- plot_ly(data=d, x= ~displ, y= ~cty)
+p0
+      #you NEED the ~, otherwise it doesn't work
+
+#ggplotly() turns ggplot object into plotly object.
+#Here's our original first ggplot. 
+p1 <- ggplot(data=d,
+             mapping = aes(x=displ, y=cty)) + geom_point()
+p1
+
+#Now, if we use plotly:
+ggplotly(p1) #can mouse over and see what exactly each point is, can do for most ggplot2 functions.
+
+
+p2 <- ggplot(d, aes(x=fl, y=hwy, group=fl))
+p2 + geom_boxplot(fill="red")
+myColors <- c("red", "darkgreen", "green", "blue", "orange")
+ggplotly(p2 + geom_boxplot(fill=myColors))
+
+
+#notice plotly vs ggplotly
+
+
+# Can add "layers" with plotly:
+
+head(txhousing) # this is real estate data from Texas
+
+allCities <- txhousing %>%
+  group_by(city) %>%
+  plot_ly(x = ~date, y = ~median) %>%
+  add_lines(alpha = 0.2, name = "Texan Cities", hoverinfo = "none")
+
+allCities
+
+allCities %>%
+  filter(city == "Houston") %>%
+  add_lines(name = "Houston")
+
+
+#If we want to add more cities, need to use add_fun instead:
+  allCities %>%
+    add_fun(function(plot) {
+      plot %>% 
+        filter(city == "Houston") %>% 
+        add_lines(name = "Houston")}) %>%
+    add_fun(function(plot) {
+      plot %>% filter(city == "Abilene") %>%
+        add_lines(name= "Abilene")
+  })
+
+
+#Legends can be used to click on and remove/add traces very easily - make it easy to create images that you want to publish.
+
+
+#Can also be used for 3D plots
+  
+#Plotting the iris dataset in 3D
+plot_ly(data=iris, x=~Sepal.Length,y=~Sepal.Width,z=~Petal.Length,type="scatter3d",mode='markers',size=~Petal.Width,color=~Species)
+
+#And animations! - useful if you have data across time for example.
+
+df <- data.frame(
+  x = c(1:5,4:1), 
+  y = c(1:5, 4:1), 
+  f = c(1:9)
+)
+
+p <- plot_ly(data=df, x = ~x, y = ~y, frame = ~f, type = 'scatter',transition= ~f, mode = 'markers', showlegend = TRUE)
+
+  
+
+p
+
+p1 <- ggplot(df, aes(x, y)) +
+    geom_point(aes(frame = f))
+
+p1
+ggplotly(p1)
+
+# Link to the plotly getting started guide I used
+#https://plotly-book.cpsievert.me/index.html 
+#https://plot.ly/r/ 
+
+```
+

@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+author: "Aubrey Pelletier"
+date: "November 19, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+# What is plot.ly? A package to create interactive graphics. It uses the htmlwidget framework, and is compatible with lots of different programs.
+
+# install.packages("plotly")
+
+library(plotly)
+
+
+plot_ly(z = ~volcano)
+
+d <- mpg
+
+#Two main ways to get a plotly object.
+
+#plot_ly() transforms data into the object.
+
+
+
+#ggplotly() turns ggplot object into plotly object.
+
+#Here's our original first ggplot. 
+p1 <- ggplot(data=d,
+             mapping = aes(x=displ, y=cty)) + geom_point()
+p1
+
+#Now, if we use plotly:
+ggplotly(p1) #can mouse over and see what exactly each point is
+
+#Annotations can be added using point and click interface
+
+```
