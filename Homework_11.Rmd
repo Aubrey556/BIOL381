@@ -1,0 +1,70 @@
+---
+title: "Homework 11"
+author: "Aubrey Pelletier"
+date: "November 7, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+
+library(ggplot2)
+library(ggthemes)
+
+df <- midwest #remember, data frame, so use $ to call columns
+
+head(df)
+str(df)
+
+p1 <- qplot(x=df$state, color=I("black"), fill=I("darkgreen"))
+p1
+#p1+ theme_base()
+p1 + theme_par()
+
+p2 <- ggplot(data=df,
+             mapping = aes(x=state),
+             color=I("black"),
+             fill=I("blue")) + geom_histogram(stat="count", fill=I("#FF8A06"))#don't need $ because we're in the data frame
+
+#p2 + theme_base()
+p2 + theme_par()
+p2 + theme_dark()
+p2 + theme_calc()
+p2 + theme_excel()
+p2 + theme_few(base_size=20)
+p2 + theme_few(base_size=15)
+p2 + theme_few(base_size=12)
+
+
+# changing labels
+
+p2 + theme_few(base_size=12) + labs(x="State", y="Count", title="States in the Midwest", caption="This is my caption about the graph I just made.") + theme(plot.title=element_text(hjust=.5), plot.caption=element_text(hjust=0))
+
+# Changing the fill to a custom color
+
+p2 + theme_few(base_size=12) + labs(x="State", y="Count", title="States in the Midwest", caption="This is my caption about the graph I just made.") + theme(plot.title=element_text(hjust=.5), plot.caption=element_text(hjust=0))
+
+
+p3 <- ggplot(data=df,
+             mapping = aes(x=state, y=poptotal),
+             color=I("black"),
+             fill=I("blue")) + geom_boxplot()
+
+p3
+
+p3 <- ggplot(data=df,
+             mapping = aes(x=state, y=poptotal),
+             color=I("black"),
+             fill=I("blue")) + 
+  geom_point(size=3, position=position_jitter(width=0.2, height=0.7))
+p3
+
+p4 <- ggplot(data=df,
+             mapping=aes(x=county, y=percollege)) + geom_point()
+p4
+
+p5 <- ggplot(data=df, mapping=aes(x=state, y=category)) + facet_grid(category~state) + geom_point()
+p5
+
+```
