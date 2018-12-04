@@ -1,0 +1,81 @@
+---
+title: "Plotly"
+author: "Aubrey Pelletier"
+date: "November 26, 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+
+#Plotly is an interactive graphics package, useful for online graphis b/c your data points are easily identified. Also useful for collaborating online.
+
+#install.packages("plotly")
+
+library(plotly)
+
+plot_ly(z= ~volcano) #to check proper installation
+
+d <- mpg
+  #data frames not required, but highly recommended. 
+
+# Two main ways to get a plotly object.
+
+#plot_ly turns data into a plotly
+p0 <- plot_ly(data=d, x = ~displ, y= ~cty)
+p0
+
+# ggplotly turns a ggplot into a plotly object
+
+p1 <- ggplot(data=d, mapping = aes(x=displ, y=cty)) + geom_point()
+p1
+ggplotly(p1)
+
+p2 <- ggplot(d, aes(x=fl, y=hwy, group=fl))
+p2 + geom_boxplot(fill="red")
+
+
+
+# can add "layers" with plotly
+head(txhousing) #real estate data from Texas
+
+allCities <- txhousing %>%
+  group_by(city) %>%
+  plot_ly(x= ~date, y= ~median) %>%
+  add_lines(alpha = 0.2, name = "Texan Cities", hoverinfo="none")
+
+allCities %>%
+  filter(city == "Houston") %>%
+  add_lines(name= "Houston")
+
+allCities %>%
+  add_fun(function(plot) {
+    plot %>%
+      filter(city == "Houston") %>%
+      add_lines(name= "Houston")}) %>%
+  add_fun(function(plot) {
+    plot %>%
+      filter(city == "Abilene") %>%
+      add_lines(name= "Abilene")})
+
+
+#Can do 3D plots
+ plot_ly(data=iris, x= ~Sepal.Length, y=~Sepal.Width, z=~Petal.Length, type="scatter3d", mode= "markers", size = ~Petal.Width, color= ~Species)
+
+ 
+ # Can also do animations
+ 
+df <- data.frame(
+  x=c(1:5, 4:1),
+  y=c(1:5, 4:1), 
+  f = c(1:9))
+
+p <- plot_ly(data=df, x= ~x, y= ~y, frame=~f, type = "scatter", transition = ~f, mode= "markers")
+
+p
+
+p1 <- ggplot(df, aes(x,y)) + geom_point(aes(frame=f))
+ggplotly(p1)
+
+```

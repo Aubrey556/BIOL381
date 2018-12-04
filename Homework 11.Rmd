@@ -25,10 +25,26 @@ p1 + theme_par()
 p2 <- ggplot(data=df,
              mapping = aes(x=state),
              color=I("black"),
-             fill=I("blue")) + geom_histogram(stat="count", fill=I("darkblue"))#don't need $ because we're in the data frame
+             fill=I("blue")) + geom_histogram(stat="count", fill=I("#FF8A06"))#don't need $ because we're in the data frame
 
 #p2 + theme_base()
 p2 + theme_par()
+p2 + theme_dark()
+p2 + theme_calc()
+p2 + theme_excel()
+p2 + theme_few(base_size=20)
+p2 + theme_few(base_size=15)
+p2 + theme_few(base_size=12)
+
+
+# changing labels
+
+p2 + theme_few(base_size=12) + labs(x="State", y="Count", title="States in the Midwest", caption="This is my caption about the graph I just made.") + theme(plot.title=element_text(hjust=.5), plot.caption=element_text(hjust=0))
+
+# Changing the fill to a custom color
+
+p2 + theme_few(base_size=12) + labs(x="State", y="Count", title="States in the Midwest", caption="This is my caption about the graph I just made.") + theme(plot.title=element_text(hjust=.5), plot.caption=element_text(hjust=0))
+
 
 p3 <- ggplot(data=df,
              mapping = aes(x=state, y=poptotal),
@@ -51,10 +67,4 @@ p4
 p5 <- ggplot(data=df, mapping=aes(x=state, y=category)) + facet_grid(category~state) + geom_point()
 p5
 
-
-
-
-#Experiment with different themes, theme base sizes, aesthetics, mappings, and faceting. When you are finished, try exporting them to high quality pdfs, jpgs, eps files, or other formats that you would use for submission to a journal.
-
-#In this exercise, I encourage you to improve your graphics with elements that we have not (yet) covered in ggplot. For example, can you change the labels on a facet plot so that they are more informative than the variable names that are supplied from your data frame? Can you figure out how to add text annotations, lines and arrows to your graph? Can you figure out how to use custom colors that you have chosen for your fills and lines? Your resources for these explorations are google, Stack Overflow - and Lauren!
 ```
